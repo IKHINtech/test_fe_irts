@@ -12,8 +12,13 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import Widgets from '@mui/icons-material/Widgets';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import SearchAppBar from './SearchBox';
+import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
+import { useDispatch, useSelector } from 'react-redux'
+import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 
-const pages = ['Products', 'Pricing', 'Blog'];
+const pages = ['HomePage', 'Products', 'Pricing', 'Blog'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 function ResponsiveAppBar() {
@@ -124,11 +129,26 @@ function ResponsiveAppBar() {
                             </Button>
                         ))}
                     </Box>
+                    <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+
+                        <SearchAppBar />
+
+                    </Box>
 
                     <Box sx={{ flexGrow: 0 }}>
+                        <IconButton >
+                            <FavoriteIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1, color: 'white', }} />
+                        </IconButton>
+                        <IconButton >
+
+                            <LocalShippingIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1, color: 'white', }} />
+                        </IconButton>
+                        <IconButton >
+                            <ShoppingBagIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1, color: 'white', }} />
+                        </IconButton>
                         <Tooltip title="Open settings">
                             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                                <Avatar alt="Remy Sharp" />
                             </IconButton>
                         </Tooltip>
                         <Menu
