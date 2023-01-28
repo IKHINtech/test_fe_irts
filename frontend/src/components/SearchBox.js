@@ -1,7 +1,7 @@
-import * as React from 'react';
+// import * as React from 'react';
+import { useState } from 'react';
 import { styled, alpha } from '@mui/material/styles';
 import InputBase from '@mui/material/InputBase';
-import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 
 const Search = styled('div')(({ theme }) => ({
@@ -46,16 +46,30 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     },
 }));
 
-export default function SearchAppBar() {
+const SearchAppBar = ({ history }) => {
+    const [keyword] = useState('')
+
+    const submitHandler = (e) => {
+        e.preventDefault()
+        if (keyword.trim()) {
+            history.push(`/search/${keyword}`)
+        } else {
+            history.push('/')
+        }
+    }
     return (
-        <Search>
-            <SearchIconWrapper>
-                <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-                placeholder="Search…"
-                inputProps={{ 'aria-label': 'search' }}
-            />
-        </Search>
+        <form onSubmit={submitHandler} >
+            <Search      >
+                <SearchIconWrapper>
+                    <SearchIcon />
+                </SearchIconWrapper>
+                <StyledInputBase
+                    placeholder="Search…"
+                    inputProps={{ 'aria-label': 'search' }}
+                />
+            </Search>
+        </form >
     );
 }
+
+export default SearchAppBar

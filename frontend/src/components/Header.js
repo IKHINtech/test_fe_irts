@@ -15,8 +15,10 @@ import Widgets from '@mui/icons-material/Widgets';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import SearchAppBar from './SearchBox';
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
-import { useDispatch, useSelector } from 'react-redux'
-import LocalShippingIcon from '@mui/icons-material/LocalShipping';
+// import { useDispatch, useSelector } from 'react-redux'
+import LocalShippingIcon from '@mui/icons-material/LocalShipping'
+import { Route, Routes } from 'react-router-dom'
+    ;
 
 const pages = ['HomePage', 'Products', 'Pricing', 'Blog'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
@@ -130,6 +132,15 @@ function ResponsiveAppBar() {
                         ))}
                     </Box>
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+                        {/* <Route path="/about" component={<SearchAppBar history={history}} /> */}
+                        {/* <Routes>
+                        <Route
+                            // path=":userId"
+                            render={({ history }) =>
+                                <SearchAppBar history={history} />
+                            }
+                        />
+                    </Routes> */}
 
                         <SearchAppBar />
 
@@ -176,7 +187,7 @@ function ResponsiveAppBar() {
                     </Box>
                 </Toolbar>
             </Container>
-        </AppBar>
+        </AppBar >
     );
 }
 export default ResponsiveAppBar;
