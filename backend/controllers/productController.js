@@ -59,16 +59,23 @@ const deleteProduct = asyncHandler(async (req, res) => {
 // @route   POST /api/products
 // @access  Private/Admin
 const createProduct = asyncHandler(async (req, res) => {
+
+    const {
+        product_name,
+        product_price,
+        product_image_url,
+        brand,
+        product_info,
+        real_pdp_url,
+    } = req.body
+
     const product = new Product({
-        name: 'Sample name',
-        price: 0,
-        user: req.user._id,
-        image: '/images/sample.jpg',
-        brand: 'Sample brand',
-        category: 'Sample category',
-        countInStock: 0,
-        numReviews: 0,
-        description: 'Sample description',
+        product_name: product_name,
+        product_price: product_price,
+        product_image_url: product_image_url,
+        brand: brand,
+        product_info: product_info,
+        real_pdp_url: real_pdp_url,
     })
 
     const createdProduct = await product.save()
@@ -80,25 +87,23 @@ const createProduct = asyncHandler(async (req, res) => {
 // @access  Private/Admin
 const updateProduct = asyncHandler(async (req, res) => {
     const {
-        name,
-        price,
-        description,
-        image,
+        product_name,
+        product_price,
+        product_image_url,
         brand,
-        category,
-        countInStock,
+        product_info,
+        real_pdp_url,
     } = req.body
 
     const product = await Product.findById(req.params.id)
 
     if (product) {
-        product.name = name
-        product.price = price
-        product.description = description
-        product.image = image
+        product.product_name = product_name
+        product.product_price = product_price
+        product.product_image_url = product_image_url
+        product.product_info = product_info
         product.brand = brand
-        product.category = category
-        product.countInStock = countInStock
+        product.real_pdp_url = real_pdp_url
 
         const updatedProduct = await product.save()
         res.json(updatedProduct)

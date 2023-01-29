@@ -25,8 +25,6 @@ const ProductListScreen = () => {
     const navigate = useNavigate()
 
     const pageNumber = searchParams.get('pageNumber') || 1
-    console.log(pageNumber)
-
 
     const dispatch = useDispatch()
 
@@ -82,7 +80,8 @@ const ProductListScreen = () => {
     const createProductHandler = () => {
         dispatch(createProduct())
     }
-    const handleEdit = ({ id }) => {
+    const handleEdit = (id) => {
+        console.log(id)
         navigate(`/admin/product/${id}/edit`)
     }
 

@@ -10,7 +10,7 @@ import RegisterScreen from './screens/RegisterScreen'
 
 
 
-// import ProductEditScreen from './screens/ProductEditScreen'
+import ProductEditScreen from './screens/ProductEditScreen'
 
 
 
@@ -32,32 +32,32 @@ function App() {
               exact
             />
 
-            <Route path='/login' element={<LoginScreen />} />
-
-            <Route path='/register' element={<RegisterScreen />} />
-
-
-
-            <Route
-              path='/admin/productlist'
-              element={<ProductListScreen />}
-              exact
-            />
-            <Route
-              path='/admin/productlist/:pageNumber'
-              element={<ProductListScreen />}
-              exact
-            />
-
-            <Route path='/product/:id' element={<ProductScreen />} />
-
-
-
             <Route
               path='/search/:keyword/page/:pageNumber'
               element={<HomeScreen />}
               exact
             />
+
+            <Route path='/login' element={<LoginScreen />} />
+            <Route path='/register' element={<RegisterScreen />} />
+
+            <Route
+              path='/admin/productlist'
+              element={<ProductListScreen />}
+              exact />
+            <Route
+              path='/admin/productlist/:pageNumber'
+              element={<ProductListScreen />}
+              exact />
+            <Route path='/admin/product/:id/edit' element={<ProductEditScreen />} />
+            <Route path='/product/:id' element={<ProductScreen />} />
+
+
+
+
+
+
+
           </Routes>
         </Container>
       </BrowserRouter>

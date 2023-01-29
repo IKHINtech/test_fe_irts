@@ -113,7 +113,7 @@ const RegisterScreen = () => {
             <Box mt={4}
 
                 mb={4}>
-                <Button variant="outlined" type='submit' w>Register</Button>
+                <Button variant="outlined" type='submit' >Register</Button>
             </Box>
 
 

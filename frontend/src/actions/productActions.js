@@ -145,6 +145,7 @@ export const createProduct = () => async (dispatch, getState) => {
 
 export const updateProduct = (product) => async (dispatch, getState) => {
   try {
+    console.log(product)
     dispatch({
       type: PRODUCT_UPDATE_REQUEST,
     })
@@ -152,6 +153,7 @@ export const updateProduct = (product) => async (dispatch, getState) => {
     const {
       userLogin: { userInfo },
     } = getState()
+    console.log(userInfo.token)
 
     const config = {
       headers: {

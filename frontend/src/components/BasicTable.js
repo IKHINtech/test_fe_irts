@@ -51,7 +51,9 @@ export default function BasicTable(props) {
                             <TableCell align="right">
 
                                 <Stack direction={'row'}>
-                                    <IconButton color="primary" onClick={() => props.edit(row.id)} ><EditIcon /></IconButton><IconButton color="error" onClick={() => props.delete(row._id)} ><DeleteIcon /></IconButton>
+                                    <IconButton color="primary" onClick={function () {
+                                        props.edit(row._id)
+                                    }} ><EditIcon /></IconButton><IconButton color="error" onClick={() => props.delete(row._id)} ><DeleteIcon /></IconButton>
                                 </Stack>
                             </TableCell>
 
