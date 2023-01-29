@@ -19,6 +19,7 @@ import ProductEditScreen from './screens/ProductEditScreen'
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import UserEditScreen from './screens/UserEditScreen';
+import CartScreen from './screens/CartScreen';
 
 
 
@@ -63,6 +64,7 @@ function App() {
             <Route path='/admin/userlist' element={<UserListScreen />} />
             <Route path='/admin/user/:id/edit' element={<UserEditScreen />} />
 
+            <Route path='/cart/:id?' element={<CartScreen />} />
 
 
 

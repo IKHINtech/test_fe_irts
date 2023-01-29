@@ -1,12 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useParams, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-// import { Row, Col, Image, ListGroup, Card, Button, Form } from 'react-bootstrap'
-// import Rating from '../components/Rating'
-// import Message from '../components/Message'
-import Loader from '../components/Loader'
-import Meta from '../components/Meta'
-import { useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
@@ -18,15 +12,16 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import {
     listProductDetails,
-    createProductReview,
 } from '../actions/productActions'
-import { PRODUCT_CREATE_REVIEW_RESET } from '../constants/productConstants'
-import { Button, CardHeader, Divider, List, ListItem, Paper, TableCell, TableRow } from '@mui/material'
+import { Button, Divider, List, ListItem, TableCell, TableRow } from '@mui/material'
 import { Stack } from '@mui/system'
+import Grid from '@mui/material/Grid';
 
 
-const ProductScreen = ({ history, match, }) => {
-    const theme = useTheme();
+
+const ProductScreen = () => {
+    const navigate = useNavigate()
+
     let { id } = useParams();
 
     const [qty, setQty] = useState(1)
@@ -41,45 +36,34 @@ const ProductScreen = ({ history, match, }) => {
     const userLogin = useSelector((state) => state.userLogin)
     const { userInfo } = userLogin
 
-    const productReviewCreate = useSelector((state) => state.productReviewCreate)
-    const {
-        success: successProductReview,
-        loading: loadingProductReview,
-        error: errorProductReview,
-    } = productReviewCreate
+
 
     useEffect(() => {
-        if (successProductReview) {
-            setRating(0)
-            setComment('')
-        }
+
         if (!product._id || product._id !== id) {
             dispatch(listProductDetails(id))
-            dispatch({ type: PRODUCT_CREATE_REVIEW_RESET })
+
         }
-    }, [dispatch, successProductReview])
+    }, [dispatch,])
 
     const addToCartHandler = () => {
-        history.push(`/cart/${id}?qty=${qty}`)
+        navigate(`/cart/${id}?qty=${qty}`)
     }
 
-    const submitHandler = (e) => {
-        e.preventDefault()
-        dispatch(
-            createProductReview(match.params.id, {
-                rating,
-                comment,
-            })
-        )
-    }
+
 
     return (
         <>
             <Box margin={4} >
 
-                <Link to='/'>
-                    <Button variant="outlined" > Go Back</Button>
-                </Link>
+                <Grid mt={4} mb={4} container justifyContent="flex-start">
+                    <Link to='/'>
+                        <Button variant="outlined" > Go Back</Button>
+                    </Link>
+
+                </Grid>
+
+
 
                 <Box mt={2} >
 
@@ -149,7 +133,16 @@ const ProductScreen = ({ history, match, }) => {
                                     </TableRow>
                                 </ListItem>
                                 <Divider></Divider>
+                                <Box mt={2}>
+                                    <Button variant="contained"
+                                        onClick={addToCartHandler}
+                                        disabled={product.product_info.toUpperCase() == 'STOK HABIS' ? true : false}
 
+                                    >
+                                        Add To Cart
+
+                                    </Button>
+                                </Box>
 
                             </List>
                         </Card>

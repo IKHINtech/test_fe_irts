@@ -12,7 +12,7 @@ export default function Product({ product }) {
         <Card sx={{ maxWidth: 230 }}>
             <CardHeader
                 action={
-                    product.product_info.toUpperCase() == 'STOK HABIS' ? <Box></Box> : <Button variant="contained" size="small" color="primary" disabled={product.product_info.toUpperCase() === "STOK HABIS"}  >
+                    product.product_info.toUpperCase() == 'STOK HABIS' || product.product_info === '' ? <Box>Stok Habis</Box> : <Button variant="contained" size="small" color="primary" disabled={product.product_info.toUpperCase() === "STOK HABIS"}  >
                         {product.product_info}
                     </Button>
                 }
