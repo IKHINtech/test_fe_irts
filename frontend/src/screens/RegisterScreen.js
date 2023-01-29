@@ -9,10 +9,10 @@ import { Box, Button, Typography } from "@mui/material"
 
 import Loader from '../components/Loader'
 import Message from '../components/Alert'
-import { Link, useLocation } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 const RegisterScreen = () => {
-    const { location } = useLocation();
+    const navigate = useNavigate();
 
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
@@ -30,7 +30,11 @@ const RegisterScreen = () => {
         if (password !== confirmPassword) {
             setMessage('Passwords do not match')
         } else {
-            dispatch(register(name, email, password))
+            if (message == null) {
+
+                dispatch(register(name, email, password))
+                navigate('/')
+            }
         }
     }
 
@@ -47,12 +51,12 @@ const RegisterScreen = () => {
         >
 
             <h1>Sign Up</h1>
-            {message && <Message variant='danger'>{message}</Message>}
-            {error && <Message variant='danger'>{error}</Message>}
-            {loading && <Loader />}
+            {message && <Message variant='error' message={<strong>{message}</strong>} ></Message>}
+            {error && <Message variant='error' message={<strong>{error}</strong>}></Message>}
+
             <div>
                 <TextField
-                    value={email}
+                    value={name}
                     required
                     // error
                     id="name"
@@ -113,7 +117,7 @@ const RegisterScreen = () => {
             <Box mt={4}
 
                 mb={4}>
-                <Button variant="outlined" type='submit' >Register</Button>
+                <Button variant="outlined" type='submit' > {loading == true ? <Loader /> : 'Register'}</Button>
             </Box>
 
 

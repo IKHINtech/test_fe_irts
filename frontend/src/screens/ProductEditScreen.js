@@ -4,9 +4,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { listProductDetails, updateProduct } from '../actions/productActions'
 import { PRODUCT_UPDATE_RESET } from '../constants/productConstants'
 import { Link, useNavigate, useParams } from 'react-router-dom'
-import axios from 'axios'
 import TextField from '@mui/material/TextField';
-import { Box, Button, Typography } from "@mui/material"
+import { Box, Button } from "@mui/material"
 
 
 

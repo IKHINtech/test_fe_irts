@@ -4,6 +4,7 @@ import Message from '../components/Alert'
 import Loader from '../components/Loader'
 import BasicPagination from '../components/Paginate'
 import BasicTable from '../components/BasicTable'
+import DialogCreateProduct from './DialogCreateProject'
 
 
 
@@ -17,6 +18,8 @@ import {
 import { PRODUCT_CREATE_RESET } from '../constants/productConstants'
 import { useSearchParams, useNavigate } from 'react-router-dom'
 import { Box } from '@mui/system'
+
+import Grid from '@mui/material/Grid';
 
 
 
@@ -57,7 +60,7 @@ const ProductListScreen = () => {
         }
 
         if (successCreate) {
-            navigate(`/admin/product/${createdProduct._id}/edit`)
+
         } else {
             dispatch(listProducts('', pageNumber))
         }
@@ -66,7 +69,6 @@ const ProductListScreen = () => {
         // history,
         userInfo,
         successDelete,
-        successCreate,
         createdProduct,
         pageNumber,
     ])
@@ -77,28 +79,33 @@ const ProductListScreen = () => {
         }
     }
 
-    const createProductHandler = () => {
-        dispatch(createProduct())
-    }
+
     const handleEdit = (id) => {
-        console.log(id)
         navigate(`/admin/product/${id}/edit`)
+    }
+
+    const handleAdd = () => {
+        navigate('/admin/product/add')
     }
 
     return (
         <>
-            <Stack direction="row" spacing={2}>
-                <Typography>Product</Typography>
-                <Button variant="outlined">Create Product</Button>
-            </Stack>
+            <Grid mt={4} mb={4} container justifyContent="flex-end">
+                <Button variant="outlined" onClick={handleAdd} >
+                    Tambah Produk
+                </Button>
+
+            </Grid>
+
+
             {loadingDelete && <Loader />}
-            {errorDelete && <Message variant='danger'>{errorDelete}</Message>}
+            {errorDelete && <Message variant='error' message={<strong>{errorDelete}</strong>}></Message>}
             {loadingCreate && <Loader />}
-            {errorCreate && <Message variant='danger'>{errorCreate}</Message>}
+            {errorCreate && <Message variant='error' message={<strong>{errorCreate}</strong>}></Message>}
             {loading ? (
                 <Loader />
             ) : error ? (
-                <Message variant='danger'>{error}</Message>
+                <Message variant='error' message={<strong>{error}</strong>}></Message>
             ) : (
                 <Box>
                     <Box mb={2}>

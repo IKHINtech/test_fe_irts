@@ -7,6 +7,8 @@ import ProductListScreen from './screens/ProductListScreen'
 import ProductScreen from './screens/ProductScreen'
 import LoginScreen from './screens/LoginScreen'
 import RegisterScreen from './screens/RegisterScreen'
+import DialogCreateProduct from './screens/DialogCreateProject'
+import UserListScreen from './screens/UserListScreen';
 
 
 
@@ -16,6 +18,7 @@ import ProductEditScreen from './screens/ProductEditScreen'
 
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import UserEditScreen from './screens/UserEditScreen';
 
 
 
@@ -46,11 +49,20 @@ function App() {
               element={<ProductListScreen />}
               exact />
             <Route
+              path='/admin/product/add'
+              element={<DialogCreateProduct />}
+              exact />
+            <Route
               path='/admin/productlist/:pageNumber'
               element={<ProductListScreen />}
               exact />
             <Route path='/admin/product/:id/edit' element={<ProductEditScreen />} />
             <Route path='/product/:id' element={<ProductScreen />} />
+
+
+            <Route path='/admin/userlist' element={<UserListScreen />} />
+            <Route path='/admin/user/:id/edit' element={<UserEditScreen />} />
+
 
 
 

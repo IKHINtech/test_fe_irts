@@ -22,6 +22,10 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import { visuallyHidden } from '@mui/utils';
 
+import EditIcon from '@mui/icons-material/Edit';
+import { Stack } from '@mui/system';
+
+
 
 function descendingComparator(a, b, orderBy) {
     if (b[orderBy] < a[orderBy]) {
@@ -60,32 +64,27 @@ const headCells = [
         id: 'name',
         numeric: false,
         disablePadding: true,
-        label: 'Product Name',
+        label: 'Name',
     },
     {
         id: 'price',
-        numeric: true,
+        numeric: false,
         disablePadding: false,
-        label: 'Product Price',
+        label: 'Email',
     },
     {
-        id: 'brand',
-        numeric: true,
+        id: 'Admin',
+        numeric: false,
         disablePadding: false,
-        label: 'Brand',
+        label: 'Admin',
     },
     {
-        id: 'info',
-        numeric: true,
+        id: 'Action',
+        numeric: false,
         disablePadding: false,
-        label: 'Product Info',
+        label: 'Action',
     },
-    {
-        id: 'image',
-        numeric: true,
-        disablePadding: false,
-        label: 'Product Image',
-    },
+
 ];
 
 function EnhancedTableHead(props) {
@@ -174,7 +173,7 @@ function EnhancedTableToolbar(props) {
                     id="tableTitle"
                     component="div"
                 >
-                    Product Data
+                    User Data
                 </Typography>
             )}
 
@@ -285,17 +284,17 @@ export default function EnhancedTable(props) {
                             {stableSort(rows, getComparator(order, orderBy))
                                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                 .map((row, index) => {
-                                    const isItemSelected = isSelected(row.product_name);
+                                    const isItemSelected = isSelected(row.name);
                                     const labelId = `enhanced-table-checkbox-${index}`;
 
                                     return (
                                         <TableRow
                                             hover
-                                            onClick={(event) => handleClick(event, row.product_name)}
+                                            onClick={(event) => handleClick(event, row.name)}
                                             role="checkbox"
                                             aria-checked={isItemSelected}
                                             tabIndex={-1}
-                                            key={row.product_name}
+                                            key={row.name}
                                             selected={isItemSelected}
                                         >
                                             <TableCell padding="checkbox">
@@ -313,12 +312,24 @@ export default function EnhancedTable(props) {
                                                 scope="row"
                                                 padding="none"
                                             >
-                                                {row.product_name}
+                                                {row.name}
                                             </TableCell>
-                                            <TableCell align="right">{row.product_price}</TableCell>
-                                            <TableCell align="right">{row.brand}</TableCell>
-                                            <TableCell align="right">{row.product_info}</TableCell>
-                                            <TableCell align="right">{row.product_image_url}</TableCell>
+                                            <TableCell align="right">{row.email}</TableCell>
+                                            <TableCell align="right">{row.isAdmin}</TableCell>
+
+                                            <TableCell align="right">
+                                                <Stack direction={'row'}>
+                                                    <IconButton color="primary" onClick={function () {
+                                                        props.edit(row._id)
+                                                    }} ><EditIcon /></IconButton><IconButton color="error" onClick={() => props.delete(row._id)} ><DeleteIcon /></IconButton>
+
+
+                                                </Stack>
+
+
+                                            </TableCell>
+
+
                                         </TableRow>
                                     );
                                 })}
