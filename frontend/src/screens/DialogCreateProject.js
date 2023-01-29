@@ -42,23 +42,26 @@ export default function DialogCreateProduct() {
     const {
         loading: loadingCreate,
         error: errorCreate,
-        success: successCreate,
-        product: createdProduct,
     } = productCreate
 
 
     const createProductHandler = (e) => {
         e.preventDefault()
-        dispatch(createProduct(
-            {
-                product_name,
-                product_price,
-                product_image_url,
-                brand,
-                product_info,
-                real_pdp_url,
-            }
-        ),)
+        if (userInfo == null) {
+            navigate('/login')
+        } else {
+            dispatch(createProduct(
+                {
+                    product_name,
+                    product_price,
+                    product_image_url,
+                    brand,
+                    product_info,
+                    real_pdp_url,
+                }
+            ),)
+        }
+
 
         navigate('/admin/productlist/')
 

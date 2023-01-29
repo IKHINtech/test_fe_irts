@@ -4,16 +4,13 @@ import Message from '../components/Alert'
 import Loader from '../components/Loader'
 import BasicPagination from '../components/Paginate'
 import BasicTable from '../components/BasicTable'
-import DialogCreateProduct from './DialogCreateProject'
 
 
 
 import Button from '@mui/material/Button';
-import { Typography, Stack } from '@mui/material'
 import {
     listProducts,
     deleteProduct,
-    createProduct,
 } from '../actions/productActions'
 import { PRODUCT_CREATE_RESET } from '../constants/productConstants'
 import { useSearchParams, useNavigate } from 'react-router-dom'
@@ -32,7 +29,7 @@ const ProductListScreen = () => {
     const dispatch = useDispatch()
 
     const productList = useSelector((state) => state.productList)
-    const { loading, error, products, page, pages, total } = productList
+    const { loading, error, products, pages, } = productList
 
     const productDelete = useSelector((state) => state.productDelete)
     const {

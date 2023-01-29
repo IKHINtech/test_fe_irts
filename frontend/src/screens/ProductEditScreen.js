@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import { listProductDetails, updateProduct } from '../actions/productActions'
 import { PRODUCT_UPDATE_RESET } from '../constants/productConstants'
-import { Link, useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import TextField from '@mui/material/TextField';
 import { Box, Button } from "@mui/material"
 
@@ -27,7 +27,7 @@ const ProductEditScreen = () => {
     const dispatch = useDispatch()
 
     const productDetails = useSelector((state) => state.productDetails)
-    const { loading, error, product } = productDetails
+    const { product } = productDetails
 
     const productUpdate = useSelector((state) => state.productUpdate)
     const {

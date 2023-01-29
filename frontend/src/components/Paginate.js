@@ -1,13 +1,11 @@
 import * as React from 'react';
 import Pagination from '@mui/material/Pagination';
 import { useNavigate } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch, } from 'react-redux'
 
 
 import {
     listProducts,
-    deleteProduct,
-    createProduct,
 } from '../actions/productActions'
 
 export default function BasicPagination({ count, pageData }) {

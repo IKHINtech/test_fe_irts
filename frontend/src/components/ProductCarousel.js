@@ -1,44 +1,4 @@
-// import React, { useEffect } from 'react'
-// import { Link } from 'react-router-dom'
-// import { Carousel, Image } from 'react-bootstrap'
-// import { useDispatch, useSelector } from 'react-redux'
-// import Loader from './Loader'
-// import Message from './Message'
-// import { listTopProducts } from '../actions/productActions'
 
-// const ProductCarousel = () => {
-//     const dispatch = useDispatch()
-
-//     const productTopRated = useSelector((state) => state.productTopRated)
-//     const { loading, error, products } = productTopRated
-
-//     useEffect(() => {
-//         dispatch(listTopProducts())
-//     }, [dispatch])
-
-//     return loading ? (
-//         <Loader />
-//     ) : error ? (
-//         <Message variant='danger'>{error}</Message>
-//     ) : (
-//         <Carousel pause='hover' className='bg-dark'>
-//             {products.map((product) => (
-//                 <Carousel.Item key={product._id}>
-//                     <Link to={`/product/${product._id}`}>
-//                         <Image src={product.image} alt={product.name} fluid />
-//                         <Carousel.Caption className='carousel-caption'>
-//                             <h2>
-//                                 {product.name} (${product.price})
-//                             </h2>
-//                         </Carousel.Caption>
-//                     </Link>
-//                 </Carousel.Item>
-//             ))}
-//         </Carousel>
-//     )
-// }
-
-// export default ProductCarousel
 
 
 import React from 'react';
@@ -49,12 +9,16 @@ function ProductCarousel() {
 
     var items = [
         {
-            name: "Random Name #1",
+            image: "https://storage.googleapis.com/eraspacelink/pmp/production/banners/images/zcPRxIwNxJML9WWpGSxsFC0KPTGl2LzmVkLjDjEj.jpg",
             description: "Probably the most random thing you have ever seen!"
         },
         {
-            name: "Random Name #2",
+            image: "https://storage.googleapis.com/eraspacelink/pmp/production/banners/images/JhDfDSPTo5R7Ye4UwcjONHWrv0LDHwBHnNfxdjVz.jpg",
             description: "Hello World!"
+        }, {
+            image: "https://storage.googleapis.com/eraspacelink/pmp/production/banners/images/0EyNx9McmUqIWz5ZwdxolWqVUWKApwuKc7Y6OLvf.jpg",
+            description: "Hello World!"
+
         }
     ]
 

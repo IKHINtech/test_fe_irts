@@ -16,6 +16,7 @@ import {
 import { Button, Divider, List, ListItem, TableCell, TableRow } from '@mui/material'
 import { Stack } from '@mui/system'
 import Grid from '@mui/material/Grid';
+import Meta from '../components/Meta';
 
 
 
@@ -25,13 +26,11 @@ const ProductScreen = () => {
     let { id } = useParams();
 
     const [qty, setQty] = useState(1)
-    const [rating, setRating] = useState(0)
-    const [comment, setComment] = useState('')
 
     const dispatch = useDispatch()
 
     const productDetails = useSelector((state) => state.productDetails)
-    const { loading, error, product } = productDetails
+    const { product } = productDetails
 
     const userLogin = useSelector((state) => state.userLogin)
     const { userInfo } = userLogin
@@ -40,10 +39,16 @@ const ProductScreen = () => {
 
     useEffect(() => {
 
-        if (!product._id || product._id !== id) {
-            dispatch(listProductDetails(id))
+        if (userInfo === null) {
+            navigate('/login')
+        } else {
+            if (!product._id || product._id !== id) {
+                dispatch(listProductDetails(id))
 
+            }
         }
+
+
     }, [dispatch,])
 
     const addToCartHandler = () => {
@@ -54,6 +59,7 @@ const ProductScreen = () => {
 
     return (
         <>
+            <Meta title={product.product_name} />
             <Box margin={4} >
 
                 <Grid mt={4} mb={4} container justifyContent="flex-start">
@@ -136,7 +142,7 @@ const ProductScreen = () => {
                                 <Box mt={2}>
                                     <Button variant="contained"
                                         onClick={addToCartHandler}
-                                        disabled={product.product_info.toUpperCase() == 'STOK HABIS' ? true : false}
+                                    // disabled={product.product_info.toUpperCase() == 'STOK HABIS' ? true : false}
 
                                     >
                                         Add To Cart

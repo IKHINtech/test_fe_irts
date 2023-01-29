@@ -17,15 +17,15 @@ import SearchAppBar from './SearchBox';
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
 import { useDispatch, useSelector } from 'react-redux'
 import LocalShippingIcon from '@mui/icons-material/LocalShipping'
-import { Link, Route, Routes } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { logout } from '../actions/userActions'
 
 
-const pages = ['HomePage', 'Products', 'Pricing', 'Blog'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const pages = ['HomePage', 'Products'];
 
 const ResponsiveAppBar = () => {
     const dispatch = useDispatch()
+    const navigate = useNavigate()
 
     const userLogin = useSelector((state) => state.userLogin)
     const { userInfo } = userLogin
@@ -51,6 +51,30 @@ const ResponsiveAppBar = () => {
     const handleCloseUserMenu = () => {
         setAnchorElUser(null);
     };
+
+    const handleOrderPage = () => {
+        if (userInfo == null) {
+            navigate('/login')
+        } else {
+
+            navigate('/orders')
+        }
+
+    }
+    const handleCart = () => {
+        if (userInfo == null) {
+            navigate('/login')
+        } else {
+
+            navigate('/cart')
+        }
+    }
+    const handleLanding = () => {
+        navigate('/landing')
+    }
+    const handlingProducts = () => {
+        navigate('/*')
+    }
 
     return (
         <AppBar position="static" color='primary'>
@@ -104,11 +128,12 @@ const ResponsiveAppBar = () => {
                                 display: { xs: 'block', md: 'none' },
                             }}
                         >
-                            {pages.map((page) => (
-                                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                                    <Typography textAlign="center">{page}</Typography>
-                                </MenuItem>
-                            ))}
+                            <MenuItem key={1} onClick={handleLanding}>
+                                <Typography textAlign="center">Home Page</Typography>
+                            </MenuItem>
+                            <MenuItem key={2} onClick={handlingProducts}>
+                                <Typography textAlign="center">Product</Typography>
+                            </MenuItem>
                         </Menu>
                     </Box>
                     <Widgets sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
@@ -131,15 +156,25 @@ const ResponsiveAppBar = () => {
                         uBox
                     </Typography>
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-                        {pages.map((page) => (
-                            <Button
-                                key={page}
-                                onClick={handleCloseNavMenu}
-                                sx={{ my: 2, color: 'white', display: 'block' }}
-                            >
-                                {page}
-                            </Button>
-                        ))}
+
+                        <Button
+                            key={'home'}
+                            onClick={handleLanding}
+                            sx={{ my: 2, color: 'white', display: 'block' }}
+                        >
+                            Homepage
+                        </Button>
+
+                        <Button
+                            key={'home'}
+                            onClick={handlingProducts}
+                            sx={{ my: 2, color: 'white', display: 'block' }}
+                        >
+                            Products
+                        </Button>
+
+
+
                     </Box>
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                         {/* <Route path="/about" component={<SearchAppBar history={history}} /> */}
@@ -160,11 +195,11 @@ const ResponsiveAppBar = () => {
                         <IconButton >
                             <FavoriteIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1, color: 'white', }} />
                         </IconButton>
-                        <IconButton >
+                        <IconButton onClick={handleOrderPage} >
 
                             <LocalShippingIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1, color: 'white', }} />
                         </IconButton>
-                        <IconButton >
+                        <IconButton onClick={handleCart}>
                             <ShoppingBagIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1, color: 'white', }} />
                         </IconButton>
 
@@ -196,6 +231,11 @@ const ResponsiveAppBar = () => {
                                 open={Boolean(anchorElUser)}
                                 onClose={handleCloseUserMenu}
                             >
+                                <MenuItem onClick={handleCloseUserMenu}>
+                                    <Link to={'/profile'}>
+                                        <Typography textAlign="center">Profile</Typography>
+                                    </Link>
+                                </MenuItem>
 
                                 <MenuItem onClick={handleCloseUserMenu}>
                                     <Link to={'/admin/userlist'}>
@@ -237,6 +277,11 @@ const ResponsiveAppBar = () => {
                                 open={Boolean(anchorElUser)}
                                 onClose={handleCloseUserMenu}
                             >
+                                <MenuItem onClick={handleCloseUserMenu}>
+                                    <Link to={'/profile'}>
+                                        <Typography textAlign="center">Profile</Typography>
+                                    </Link>
+                                </MenuItem>
                                 <MenuItem onClick={logoutHandler}>
                                     <Typography textAlign="center">Logout</Typography>
                                 </MenuItem>

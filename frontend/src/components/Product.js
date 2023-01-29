@@ -5,7 +5,7 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { Link } from 'react-router-dom'
 
-import { Button, CardActionArea, CardActions, Box, CardHeader } from '@mui/material';
+import { Button, CardActions, Box, CardHeader } from '@mui/material';
 
 export default function Product({ product }) {
     return (

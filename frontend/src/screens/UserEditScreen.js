@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link, useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { updateUser, getUserDetails } from '../actions/userActions'
 import { USER_UPDATE_RESET } from '../constants/userConstants'
 

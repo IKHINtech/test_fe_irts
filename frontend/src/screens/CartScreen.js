@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
 import { Link, useSearchParams, useParams, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import Message from '../components/Alert'
 import { addToCart, removeFromCart } from '../actions/cartActions'
 import DeleteIcon from '@mui/icons-material/Delete';
 
@@ -43,7 +42,7 @@ const CartScreen = () => {
     }
 
     const checkoutHandler = () => {
-        navigate('/login?redirect=shipping')
+        navigate('/shipping')
     }
 
     return (

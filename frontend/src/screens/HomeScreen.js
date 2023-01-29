@@ -3,12 +3,9 @@ import Meta from '../components/Meta'
 import React, { useEffect } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { listProducts } from '../actions/productActions'
-import Carousel from '../components/ProductCarousel'
-import { Paper } from '@mui/material'
-import ResponsiveAppBar from '../components/Header'
 import Product from '../components/Product'
 import Message from '../components/Alert'
-import { Stack, Box } from '@mui/system'
+import { Box } from '@mui/system'
 import Grid from '@mui/material/Grid';
 import Loader from '../components/Loader'
 
@@ -28,7 +25,7 @@ const HomeScreen = () => {
     const dispatch = useDispatch()
 
     const productList = useSelector((state) => state.productList)
-    const { loading, error, products, page, pages } = productList
+    const { loading, error, products, } = productList
 
     useEffect(() => {
         console.log(products)
