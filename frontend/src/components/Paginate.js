@@ -1,10 +1,31 @@
 import * as React from 'react';
 import Pagination from '@mui/material/Pagination';
-// import Stack from '@mui/material/Stack';
+import { useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
 
-export default function BasicPagination({ count }) {
+
+import {
+    listProducts,
+    deleteProduct,
+    createProduct,
+} from '../actions/productActions'
+
+export default function BasicPagination({ count, pageData }) {
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
+    const [page, setPage] = React.useState(1);
+
+    const handleChange = (event, value) => {
+        navigate(`/admin/productlist/?pageNumber=${value}`)
+        setPage(value)
+        dispatch(listProducts('', value))
+
+
+    };
+
+
     return (
-        <Pagination count={count} />
+        <Pagination count={count} page={pageData} onChange={handleChange} />
 
     );
 }

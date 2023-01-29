@@ -15,15 +15,25 @@ import Widgets from '@mui/icons-material/Widgets';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import SearchAppBar from './SearchBox';
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
-// import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import LocalShippingIcon from '@mui/icons-material/LocalShipping'
-import { Route, Routes } from 'react-router-dom'
-    ;
+import { Link, Route, Routes } from 'react-router-dom'
+import { logout } from '../actions/userActions'
+
 
 const pages = ['HomePage', 'Products', 'Pricing', 'Blog'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
-function ResponsiveAppBar() {
+const ResponsiveAppBar = () => {
+    const dispatch = useDispatch()
+
+    const userLogin = useSelector((state) => state.userLogin)
+    const { userInfo } = userLogin
+
+    const logoutHandler = () => {
+        dispatch(logout())
+    }
+
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -157,33 +167,84 @@ function ResponsiveAppBar() {
                         <IconButton >
                             <ShoppingBagIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1, color: 'white', }} />
                         </IconButton>
-                        <Tooltip title="Open settings">
+
+                        {userInfo ? (<Tooltip title="Open settings">
                             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                                <Avatar alt="Remy Sharp" />
+                                <Avatar alt={userInfo.name} />
                             </IconButton>
-                        </Tooltip>
-                        <Menu
-                            sx={{ mt: '45px' }}
-                            id="menu-appbar"
-                            anchorEl={anchorElUser}
-                            anchorOrigin={{
-                                vertical: 'top',
-                                horizontal: 'right',
-                            }}
-                            keepMounted
-                            transformOrigin={{
-                                vertical: 'top',
-                                horizontal: 'right',
-                            }}
-                            open={Boolean(anchorElUser)}
-                            onClose={handleCloseUserMenu}
-                        >
-                            {settings.map((setting) => (
-                                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                                    <Typography textAlign="center">{setting}</Typography>
+                        </Tooltip>) : (<Link to={'/login'}>
+                            <Typography variant="outlined"  >
+                                Login
+                            </Typography>
+
+                        </Link>)
+                        }
+                        {userInfo && userInfo.isAdmin && (
+                            <Menu
+                                sx={{ mt: '45px' }}
+                                id="menu-appbar"
+                                anchorEl={anchorElUser}
+                                anchorOrigin={{
+                                    vertical: 'top',
+                                    horizontal: 'right',
+                                }}
+                                keepMounted
+                                transformOrigin={{
+                                    vertical: 'top',
+                                    horizontal: 'right',
+                                }}
+                                open={Boolean(anchorElUser)}
+                                onClose={handleCloseUserMenu}
+                            >
+
+                                <MenuItem onClick={handleCloseUserMenu}>
+                                    <Link to={'/admin/userlist'}>
+                                        <Typography textAlign="center">Users</Typography>
+                                    </Link>
                                 </MenuItem>
-                            ))}
-                        </Menu>
+                                <MenuItem onClick={handleCloseUserMenu}>
+                                    <Link to={'/admin/productlist'}>
+                                        <Typography textAlign="center">Products</Typography>
+                                    </Link>
+                                </MenuItem>
+
+                                <MenuItem onClick={handleCloseUserMenu}>
+                                    <Link to={'/admin/orderlist'}>
+                                        <Typography textAlign="center">Orders</Typography>
+                                    </Link>
+                                </MenuItem>
+
+                                <MenuItem onClick={logoutHandler}>
+                                    <Typography textAlign="center">Logout</Typography>
+                                </MenuItem>
+
+                            </Menu>
+                        )}
+                        {userInfo && !userInfo.isAdmin && (
+                            <Menu
+                                sx={{ mt: '45px' }}
+                                id="menu-appbar"
+                                anchorEl={anchorElUser}
+                                anchorOrigin={{
+                                    vertical: 'top',
+                                    horizontal: 'right',
+                                }}
+                                keepMounted
+                                transformOrigin={{
+                                    vertical: 'top',
+                                    horizontal: 'right',
+                                }}
+                                open={Boolean(anchorElUser)}
+                                onClose={handleCloseUserMenu}
+                            >
+                                <MenuItem onClick={logoutHandler}>
+                                    <Typography textAlign="center">Logout</Typography>
+                                </MenuItem>
+
+                            </Menu>
+
+                        )}
+
                     </Box>
                 </Toolbar>
             </Container>

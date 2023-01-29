@@ -11,10 +11,6 @@ import Loader from '../components/Loader'
 import Message from '../components/Alert'
 import { Link, useLocation } from 'react-router-dom'
 
-
-
-
-
 const RegisterScreen = () => {
     const { location } = useLocation();
 

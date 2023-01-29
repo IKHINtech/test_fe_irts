@@ -20,7 +20,6 @@ import Loader from '../components/Loader'
 const HomeScreen = () => {
 
     const [searchParams] = useSearchParams();
-    console.log(searchParams)
 
     const keyword = searchParams.get('keyword')
 
